@@ -7,6 +7,8 @@ import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
 import java.io.*; 
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
 
 
 public class fanduel extends JFrame{
@@ -27,22 +29,22 @@ public class fanduel extends JFrame{
 
         // Custom Fanduel Fonts
         try {
-            Shentox = Font.createFont(Font.TRUETYPE_FONT, new File("src/ShentoxBold.ttf")).deriveFont(32f);
-            NovaBold = Font.createFont(Font.TRUETYPE_FONT, new File("src/Proxima Nova Bold.ttf")).deriveFont(18f);
-            NovaReg = Font.createFont(Font.TRUETYPE_FONT, new File("src/Proxima Nova Reg.ttf")).deriveFont(14f);
+            Shentox = Font.createFont(Font.TRUETYPE_FONT, new File("src/resources/ShentoxBold.ttf")).deriveFont(32f);
+            NovaBold = Font.createFont(Font.TRUETYPE_FONT, new File("src/resources/Proxima Nova Bold.ttf")).deriveFont(18f);
+            NovaReg = Font.createFont(Font.TRUETYPE_FONT, new File("src/resources/Proxima Nova Reg.ttf")).deriveFont(14f);
 
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/ShentoxBold.ttf")));
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/Proxima Nova Bold.ttf")));
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/Proxima Nova Reg.ttf")));
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/resources/ShentoxBold.ttf")));
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/resources/Proxima Nova Bold.ttf")));
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/resources/Proxima Nova Reg.ttf")));
         } 
         catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
 
         // Set the size of the app.
-        setSize(960, 720);
+        setSize(960, 620);
 
         // Dashboard Panel and Border
         JPanel dashboard = new JPanel();
@@ -52,7 +54,18 @@ public class fanduel extends JFrame{
         dashboard.setBorder(new CompoundBorder(new EmptyBorder(10, 10, 10, 10), title));
         setContentPane(dashboard);
 
-        
+
+        // Logo
+        BufferedImage logojpg = null;
+        try {
+            logojpg = ImageIO.read(new File("src/resources/FanDuel-shield-logo.png"));
+            Image conv = logojpg.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+            JLabel logo = new JLabel(new ImageIcon(conv));
+            logo.setBounds(20,5,50,50);
+            dashboard.add(logo);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
 
         /* 
         Sports Module (Maybe move this to a different file?)
