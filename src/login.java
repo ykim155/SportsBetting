@@ -2,7 +2,6 @@ package src;
 
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.border.*;
 import java.awt.*;
 import java.io.*; 
 import java.awt.image.BufferedImage;
@@ -46,19 +45,17 @@ public class login extends JFrame{
         // login Panel and Border
         JPanel login = new JPanel();
         login.setLayout(null);
-        TitledBorder title = new TitledBorder(new LineBorder(login.getBackground(), 1), "           Welcome to FanDuel");
-        title.setTitleFont(Shentox);
-        login.setBorder(new CompoundBorder(new EmptyBorder(10, 10, 10, 10), title));
+        login.setBackground(Color.decode("#CFD6DB"));
         setContentPane(login);
 
 
         // Logo
         BufferedImage logojpg = null;
         try {
-            logojpg = ImageIO.read(new File("src/resources/FanDuel-shield-logo.png"));
-            Image conv = logojpg.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+            logojpg = ImageIO.read(new File("src/resources/fanduel-vertical-logo.png"));
+            Image conv = logojpg.getScaledInstance(409, 290, Image.SCALE_SMOOTH);
             JLabel logo = new JLabel(new ImageIcon(conv));
-            logo.setBounds(20,5,50,50);
+            logo.setBounds(280,5,409,290);
             login.add(logo);
         } catch (IOException e1) {
             e1.printStackTrace();
@@ -66,25 +63,26 @@ public class login extends JFrame{
 
         JLabel loginAsk = new JLabel("Login:");
         loginAsk.setFont(NovaBold);
-        loginAsk.setBounds(150, 150, 100, 50);
+        loginAsk.setBounds(380, 315, 100, 50);
         login.add(loginAsk);
 
         JTextField nameField = new JTextField();
         nameField.setEditable(true);
-        nameField.setBounds(250, 165, 150, 20);
+        nameField.setBounds(430, 330, 150, 20);
         login.add(nameField);
 
         JLabel passwordAsk = new JLabel("Password:");
         passwordAsk.setFont(NovaBold);
-        passwordAsk.setBounds(150, 200, 100, 50);
+        passwordAsk.setBounds(345, 350, 100, 50);
         login.add(passwordAsk);
 
         JTextField passwordField = new JTextField();
         passwordField.setEditable(true);
-        passwordField.setBounds(250, 213, 150, 20);
+        passwordField.setBounds(430, 365, 150, 20);
         login.add(passwordField);
 
         JButton log = new JButton("Login");
+        log.setFont(NovaReg);
         log.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -92,15 +90,16 @@ public class login extends JFrame{
                 
             }
         });
-        log.setBounds(250, 250, 150, 20);
+        log.setBounds(420, 400, 100, 20);
         login.add(log);
 
         JLabel signUp = new JLabel("Need to sign up?");
-        signUp.setFont(new Font("Times New Roman", Font.PLAIN, 12));
-        signUp.setBounds(250, 265, 150, 20);
+        signUp.setFont(NovaReg);
+        signUp.setBounds(417, 450, 150, 20);
         login.add(signUp);
 
         JButton sign = new JButton("Sign Up");
+        sign.setFont(NovaReg);
         sign.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -108,7 +107,7 @@ public class login extends JFrame{
                 
             }
         });
-        sign.setBounds(250, 280, 150, 20);
+        sign.setBounds(395, 470, 150, 20);
         login.add(sign);
 
     }
