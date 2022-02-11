@@ -84,9 +84,20 @@ public class login extends JFrame{
         passwordField.setBounds(250, 213, 150, 20);
         login.add(passwordField);
 
+        JButton log = new JButton("Login");
+        log.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                
+            }
+        });
+        log.setBounds(250, 250, 150, 20);
+        login.add(log);
+
         JLabel signUp = new JLabel("Need to sign up?");
         signUp.setFont(new Font("Times New Roman", Font.PLAIN, 12));
-        signUp.setBounds(300, 250, 150, 20);
+        signUp.setBounds(250, 265, 150, 20);
         login.add(signUp);
 
         JButton sign = new JButton("Sign Up");
@@ -97,7 +108,7 @@ public class login extends JFrame{
                 
             }
         });
-        sign.setBounds(300, 265, 150, 20);
+        sign.setBounds(250, 280, 150, 20);
         login.add(sign);
 
     }
