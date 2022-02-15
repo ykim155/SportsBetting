@@ -87,7 +87,9 @@ public class login extends JFrame{
         {
             public void actionPerformed(ActionEvent e)
             {
-                
+                fanduel fanD = new fanduel();   
+                setVisible(false); // Hide current frame
+                fanD.setVisible(true);
             }
         });
         log.setBounds(420, 400, 100, 20);
