@@ -9,6 +9,9 @@ import java.awt.*;
 import java.io.*; 
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Date;
 
 
 public class fanduel extends JFrame{
@@ -24,7 +27,16 @@ public class fanduel extends JFrame{
     Font NovaReg;
 
     public fanduel(){
-        
+        // Frame title display current time
+		//
+		Date  date = new Date();
+		String str = String.format("%tc", date);
+			   
+       	   
+		String titleString = "--- Food Truck Kiosk --- " + str; 				    
+		setTitle(titleString);
+			
+		NumberFormat formatter = new DecimalFormat("#0.00");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Custom Fanduel Fonts
@@ -214,6 +226,22 @@ public class fanduel extends JFrame{
         forward.setFont(new Font("Helvetica", Font.BOLD, 30));
         forward.setBounds(455, 535, 275, 40);
         dashboard.add(forward);
+
+        //
+		// EXIT Button
+		//
+		JButton exit = new JButton("EXIT");
+		exit.setFont(new Font("Helvetica", Font.BOLD, 16));
+		exit.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{			
+				    dispose();
+			}
+			
+		});
+		exit.setBounds(800, 535, 133, 34);
+		dashboard.add(exit);
 
         /*
         Games Module

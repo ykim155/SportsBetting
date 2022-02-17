@@ -6,6 +6,9 @@ import java.awt.*;
 import java.io.*; 
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Date;
 
 public class login extends JFrame{
     public static void main(String[] args){
@@ -21,6 +24,17 @@ public class login extends JFrame{
 
     public login()
     {
+			// Frame title display current time
+			//
+			Date  date = new Date();
+			String str = String.format("%tc", date);
+			   
+       	   
+			String titleString = "--- Food Truck Kiosk --- " + str; 				    
+			setTitle(titleString);
+			
+			NumberFormat formatter = new DecimalFormat("#0.00");
+			
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Custom Fanduel Fonts
@@ -90,6 +104,7 @@ public class login extends JFrame{
                 fanduel fanD = new fanduel();   
                 setVisible(false); // Hide current frame
                 fanD.setVisible(true);
+                dispose();
             }
         });
         log.setBounds(420, 400, 100, 20);
@@ -106,7 +121,10 @@ public class login extends JFrame{
         {
             public void actionPerformed(ActionEvent e)
             {
-                
+                signup sign = new signup();
+                setVisible(false);
+                sign.setVisible(true);
+                dispose();
             }
         });
         sign.setBounds(395, 470, 150, 20);
