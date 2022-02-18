@@ -357,7 +357,7 @@ public class fanduel extends JFrame{
         sportsButtons.add(Box.createRigidArea(new Dimension(0, 10)));
 
         // Baseball Button
-        JButton baseballBtn = new JButton("NHL");
+        JButton baseballBtn = new JButton("MLB");
         baseballBtn.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
 
