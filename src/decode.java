@@ -120,10 +120,6 @@ public class decode {
                 }
             }
             in.close();
-            System.out.println(h2h);
-            System.out.println(spread);
-            System.out.println(totals);
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

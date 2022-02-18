@@ -30,7 +30,7 @@ public class fanduel extends JFrame{
 
     private int numGames;
     private int numPages;
-    private int pageCounter;
+    private int curPage;
 
     private decode basketball;
     private decode football;
@@ -44,38 +44,122 @@ public class fanduel extends JFrame{
     private Map<String, Float[]> spread;
     private Map<String, Float[]> totals;
 
+    private JPanel games;
+    private JPanel gameLabels;
+    private JPanel game1;
+    private JPanel game2;
+
     // Game 1, Team 1
-    private JLabel g1t1 = new JLabel();
-    private JLabel g1t2 = new JLabel();
+    private JLabel g1t1 = new customJLabel(NovaReg);
+    private JLabel g1t2 = new customJLabel(NovaReg);
 
     // Game 1, Team 1, Moneyline
-    private JButton g1t1m = new JButton();
-    private JButton g1t2m = new JButton();
+    private JButton g1t1m = new customJButton(NovaReg);
+    private JButton g1t2m = new customJButton(NovaReg);
 
     // Game 1, Team 1, Spread
-    private JButton g1t1s = new JButton();
-    private JButton g1t2s = new JButton();
+    private JButton g1t1s = new customJButton(NovaReg);
+    private JButton g1t2s = new customJButton(NovaReg);
 
     // Game 1 under
-    private JButton g1under = new JButton();
-    private JButton g1over = new JButton();
+    private JButton g1under = new customJButton(NovaReg);
+    private JButton g1over = new customJButton(NovaReg);
 
     // Game 2, Team 1
-    private JButton g2t1 = new JButton();
-    private JButton g2t2 = new JButton();
+    private JButton g2t1 = new customJButton(NovaReg);
+    private JButton g2t2 = new customJButton(NovaReg);
 
     // Game 2, Team 1, Moneyline
-    private JButton g2t1m = new JButton();
-    private JButton g2t2m = new JButton();
+    private JButton g2t1m = new customJButton(NovaReg);
+    private JButton g2t2m = new customJButton(NovaReg);
 
     // Game 2, Team 1, Spread
-    private JButton g2t1s = new JButton();
-    private JButton g2t2s = new JButton();
+    private JButton g2t1s = new customJButton(NovaReg);
+    private JButton g2t2s = new customJButton(NovaReg);
 
     // Game 2 Under
-    private JButton g2under = new JButton();
-    private JButton g2over = new JButton();
+    private JButton g2under = new customJButton(NovaReg);
+    private JButton g2over = new customJButton(NovaReg);
 
+    public void displayGames(decode sport, int pageCounter){
+        // Add the game panels
+        games.add(gameLabels);
+        games.add(game1);
+        games.add(Box.createRigidArea(new Dimension(0, 10)));
+        games.add(game2);
+        games.add(Box.createRigidArea(new Dimension(0, 10)));
+
+
+        // Use get methods to set variables
+        homeTeams = sport.getHomeTeams();
+        awayTeams = sport.getAwayTeams();
+        h2h = sport.getMoneylines();
+        spread = sport.getSpreads();
+        totals = sport.getTotals();
+        numGames = homeTeams.size();
+        numPages = (int) Math.ceil(numGames / 2);
+
+        // Write team names
+        g1t1.setText("<html>" + "<center>" + homeTeams.get(pageCounter) + "</center>" + "</html>");
+        g1t1.setHorizontalAlignment(JLabel.CENTER);
+
+        g1t2.setText("<html>" + "<center>" + awayTeams.get(pageCounter) + "</center>" + "</html>");
+        g1t2.setHorizontalAlignment(JLabel.CENTER);
+
+        // Check if bets are locked.
+        if(h2h.get(homeTeams.get(pageCounter)) == null){
+            g1t1m.setText("Locked");
+            g1t2m.setText("Locked");
+
+            g1t1m.setEnabled(false);
+            g1t2m.setEnabled(false);
+        }
+        else{
+            g1t1m.setText(h2h.get(homeTeams.get(pageCounter)).toString());
+            g1t2m.setText(h2h.get(awayTeams.get(pageCounter)).toString());
+        }
+
+
+        // Check if bets are locked.
+        if(spread.get(homeTeams.get(pageCounter)) == null){
+            g1t1s.setText("Locked");
+            g1t1s.setEnabled(false);
+
+            g1t2s.setText("Locked");
+            g1t2s.setEnabled(false);
+        }
+        else{
+            g1t1s.setText(spread.get(homeTeams.get(pageCounter))[1].toString() + " " + spread.get(homeTeams.get(pageCounter))[0].toString());
+            g1t2s.setText(spread.get(awayTeams.get(pageCounter))[1].toString() + " " + spread.get(awayTeams.get(pageCounter))[0].toString());
+        }
+        
+
+        // Check if bets are locked.
+        if(totals.get("Over" + homeTeams.get(pageCounter)) == null){
+            g1over.setText("Locked");
+            g1over.setEnabled(false);
+
+            g1under.setText("Locked");
+            g1under.setEnabled(false);
+        }
+        else{
+            g1over.setText("O " + totals.get("Over" + homeTeams.get(pageCounter))[1].toString() + " " + totals.get("Over" + homeTeams.get(pageCounter))[0].toString());
+            g1under.setText("U " + totals.get("Under" + homeTeams.get(pageCounter))[1].toString() + " " + totals.get("Under" + homeTeams.get(pageCounter))[0].toString());
+        }
+
+        game1.add(g1t1);
+        game1.add(g1t1m);
+        game1.add(g1t1s);
+        game1.add(g1over);
+
+        game1.add(g1t2);
+        game1.add(g1t2m);
+        game1.add(g1t2s);
+        game1.add(g1under);
+
+        game1.revalidate();
+        game1.repaint();
+    }
 
     public fanduel(){
         // Frame title display current time
@@ -133,37 +217,41 @@ public class fanduel extends JFrame{
         /*
         Games Module
         */
-        JPanel games = new RoundedPanel(30, Color.decode("#AFBBC2"), Color.decode("#AFBBC2"));
+        games = new RoundedPanel(30, Color.decode("#AFBBC2"), Color.decode("#AFBBC2"));
         games.setLayout(new BoxLayout(games, BoxLayout.PAGE_AXIS));
         games.setBounds(180, 100, 550, 430);
         games.setBorder(new EmptyBorder(0,0,0,0));
         dashboard.add(games);
 
         // Displaying the games
-        JPanel gameLabels = new JPanel();
+        gameLabels = new JPanel();
         gameLabels.setBackground(Color.decode("#AFBBC2"));
         gameLabels.setLayout(new GridLayout(0, 4));
         gameLabels.setMaximumSize(new Dimension(500, 30));
         JLabel teamLabel = new JLabel("Team");
         teamLabel.setHorizontalAlignment(JLabel.CENTER);
+        teamLabel.setFont(NovaReg);
         gameLabels.add(teamLabel);
         JLabel h2hLabel = new JLabel("Head to Head");
         h2hLabel.setHorizontalAlignment(JLabel.CENTER);
+        h2hLabel.setFont(NovaReg);
         gameLabels.add(h2hLabel);
         JLabel spreadLabel = new JLabel("Spreads");
         spreadLabel.setHorizontalAlignment(JLabel.CENTER);
+        spreadLabel.setFont(NovaReg);
         gameLabels.add(spreadLabel);
         JLabel totalLabel = new JLabel("Totals");
         totalLabel.setHorizontalAlignment(JLabel.CENTER);
+        totalLabel.setFont(NovaReg);
         gameLabels.add(totalLabel);
 
-        JPanel game1 = new RoundedPanel(30, Color.decode("#C2CBD1"), Color.decode("#C2CBD1"));
+        game1 = new RoundedPanel(30, Color.decode("#C2CBD1"), Color.decode("#C2CBD1"));
         game1.setBackground(Color.decode("#AFBBC2"));
         game1.setLayout(new GridLayout(0, 4));
         game1.setMaximumSize(new Dimension(530, 200));
         game1.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JPanel game2 = new RoundedPanel(30, Color.decode("#C2CBD1"), Color.decode("#C2CBD1"));
+        game2 = new RoundedPanel(30, Color.decode("#C2CBD1"), Color.decode("#C2CBD1"));
         game2.setBackground(Color.decode("#AFBBC2"));
         game2.setLayout(new GridLayout(0, 4));
         game2.setMaximumSize(new Dimension(530, 200));
@@ -212,8 +300,8 @@ public class fanduel extends JFrame{
         JButton bballBtn = new JButton("NBA");
         bballBtn.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                // Set page counter to 0 every time this button is pressed.
-                pageCounter = 0;
+                games.removeAll();
+                curPage = 0;
 
                 // Parse JSON from API call
                 try {
@@ -221,84 +309,8 @@ public class fanduel extends JFrame{
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
-                
-                // Add the game panels
-                games.add(gameLabels);
-                games.add(game1);
-                games.add(Box.createRigidArea(new Dimension(0, 10)));
-                games.add(game2);
-                games.add(Box.createRigidArea(new Dimension(0, 10)));
 
-
-                // Use get methods to set variables
-                homeTeams = basketball.getHomeTeams();
-                awayTeams = basketball.getAwayTeams();
-                h2h = basketball.getMoneylines();
-                spread = basketball.getSpreads();
-                totals = basketball.getTotals();
-                numGames = homeTeams.size();
-                numPages = (int) Math.ceil(numGames / 2);
-
-                // Write team names
-                g1t1.setText("<html>" + "<center>" + homeTeams.get(pageCounter) + "</center>" + "</html>");
-                g1t1.setHorizontalAlignment(JLabel.CENTER);
-
-                g1t2.setText("<html>" + "<center>" + awayTeams.get(pageCounter) + "</center>" + "</html>");
-                g1t2.setHorizontalAlignment(JLabel.CENTER);
-
-                // Check if bets are locked.
-                if(h2h.get(homeTeams.get(pageCounter)) == null){
-                    g1t1m.setText("Locked");
-                    g1t2m.setText("Locked");
-
-                    g1t1m.setEnabled(false);
-                    g1t2m.setEnabled(false);
-                }
-                else{
-                    g1t1m.setText(h2h.get(homeTeams.get(pageCounter)).toString());
-                    g1t2m.setText(h2h.get(awayTeams.get(pageCounter)).toString());
-                }
-
-
-                // Check if bets are locked.
-                if(spread.get(homeTeams.get(pageCounter)) == null){
-                    g1t1s.setText("Locked");
-                    g1t1s.setEnabled(false);
-
-                    g1t2s.setText("Locked");
-                    g1t2s.setEnabled(false);
-                }
-                else{
-                    g1t1s.setText(spread.get(homeTeams.get(pageCounter))[1].toString() + " " + spread.get(homeTeams.get(pageCounter))[0].toString());
-                    g1t2s.setText(spread.get(awayTeams.get(pageCounter))[1].toString() + " " + spread.get(awayTeams.get(pageCounter))[0].toString());
-                }
-                
-
-                // Check if bets are locked.
-                if(totals.get("Over" + homeTeams.get(pageCounter)) == null){
-                    g1over.setText("Locked");
-                    g1over.setEnabled(false);
-
-                    g1under.setText("Locked");
-                    g1under.setEnabled(false);
-                }
-                else{
-                    g1over.setText("O " + totals.get("Over" + homeTeams.get(pageCounter))[1].toString() + " " + totals.get("Over" + homeTeams.get(pageCounter))[0].toString());
-                    g1under.setText("U " + totals.get("Under" + homeTeams.get(pageCounter))[1].toString() + " " + totals.get("Under" + homeTeams.get(pageCounter))[0].toString());
-                }
-
-                game1.add(g1t1);
-                game1.add(g1t1m);
-                game1.add(g1t1s);
-                game1.add(g1over);
-
-                game1.add(g1t2);
-                game1.add(g1t2m);
-                game1.add(g1t2s);
-                game1.add(g1under);
-
-                game1.revalidate();
-                game1.repaint();
+                displayGames(basketball, curPage);
 
             }
         });
@@ -318,8 +330,17 @@ public class fanduel extends JFrame{
         JButton hockeyBtn = new JButton("NHL");
         hockeyBtn.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+                games.removeAll();
+                curPage = 0;
 
-                // Event in here.
+                // Parse JSON from API call
+                try {
+                    hockey = new decode("https://api.the-odds-api.com/v4/sports/icehockey_nhl/odds/?apiKey=5081c089e598260629a5e8f81e9eccca&regions=us&markets=h2h,spreads,totals&oddsFormat=american");
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+
+                displayGames(hockey, curPage);
 
             }
         });
