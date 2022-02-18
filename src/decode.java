@@ -19,15 +19,31 @@ public class decode {
     URL url;
     JSONParser parser = new JSONParser();
 
-    public Vector<String> homeTeams = new Vector<String>();
-    public Vector<String> awayTeams = new Vector<String>();
+    private Vector<String> homeTeams = new Vector<String>();
+    private Vector<String> awayTeams = new Vector<String>();
 
-    public Map<String, Float> h2h = new LinkedHashMap<String, Float>();
-    public Map<String, Float[]> spread = new LinkedHashMap<String, Float[]>();
-    public Map<String, Float[]> totals = new LinkedHashMap<String, Float[]>();
+    private Map<String, Float> h2h = new LinkedHashMap<String, Float>();
+    private Map<String, Float[]> spread = new LinkedHashMap<String, Float[]>();
+    private Map<String, Float[]> totals = new LinkedHashMap<String, Float[]>();
     
-    public static void main(String[] args) throws Exception{
-        decode p = new decode("https://api.the-odds-api.com/v4/sports/basketball_nba/odds/?apiKey=5081c089e598260629a5e8f81e9eccca&regions=us&markets=h2h,spreads,totals&oddsFormat=american");
+    public Vector<String> getHomeTeams(){
+        return homeTeams;
+    }
+
+    public Vector<String> getAwayTeams(){
+        return awayTeams;
+    }
+
+    public Map<String, Float> getMoneylines(){
+        return h2h;
+    }
+
+    public Map<String, Float[]> getSpreads(){
+        return spread;
+    }
+
+    public Map<String, Float[]> getTotals(){
+        return totals;
     }
 
     public decode(String str) throws Exception{
