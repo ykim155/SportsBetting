@@ -30,7 +30,7 @@ public class fanduel extends JFrame{
 
     private int numGames;
     private int numPages;
-    private int curPage;
+    private int gameNum;
 
     private decode basketball;
     private decode football;
@@ -46,7 +46,6 @@ public class fanduel extends JFrame{
 
     private JPanel games;
     private JPanel gameLabels;
-    private JPanel game1;
     private JPanel game2;
 
     // Game 1, Team 1
@@ -81,15 +80,7 @@ public class fanduel extends JFrame{
     private JButton g2under = new customJButton(NovaReg);
     private JButton g2over = new customJButton(NovaReg);
 
-    public void displayGames(decode sport, int pageCounter){
-        // Add the game panels
-        games.add(gameLabels);
-        games.add(game1);
-        games.add(Box.createRigidArea(new Dimension(0, 10)));
-        games.add(game2);
-        games.add(Box.createRigidArea(new Dimension(0, 10)));
-
-
+    public void popLists(decode sport){
         // Use get methods to set variables
         homeTeams = sport.getHomeTeams();
         awayTeams = sport.getAwayTeams();
@@ -98,16 +89,28 @@ public class fanduel extends JFrame{
         totals = sport.getTotals();
         numGames = homeTeams.size();
         numPages = (int) Math.ceil(numGames / 2);
+    }
+
+    public void displayGames(int curGame){
+        JPanel game1 = new RoundedPanel(30, Color.decode("#C2CBD1"), Color.decode("#C2CBD1"));
+        game1.setBackground(Color.decode("#AFBBC2"));
+        game1.setLayout(new GridLayout(0, 4));
+        game1.setMaximumSize(new Dimension(530, 200));
+        game1.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        // Add the game panels
+        games.add(game1);
+        games.add(Box.createRigidArea(new Dimension(0, 10)));
 
         // Write team names
-        g1t1.setText("<html>" + "<center>" + homeTeams.get(pageCounter) + "</center>" + "</html>");
+        g1t1.setText("<html>" + "<center>" + homeTeams.get(curGame) + "</center>" + "</html>");
         g1t1.setHorizontalAlignment(JLabel.CENTER);
 
-        g1t2.setText("<html>" + "<center>" + awayTeams.get(pageCounter) + "</center>" + "</html>");
+        g1t2.setText("<html>" + "<center>" + awayTeams.get(curGame) + "</center>" + "</html>");
         g1t2.setHorizontalAlignment(JLabel.CENTER);
 
         // Check if bets are locked.
-        if(h2h.get(homeTeams.get(pageCounter)) == null){
+        if(h2h.get(homeTeams.get(curGame)) == null){
             g1t1m.setText("Locked");
             g1t2m.setText("Locked");
 
@@ -115,13 +118,13 @@ public class fanduel extends JFrame{
             g1t2m.setEnabled(false);
         }
         else{
-            g1t1m.setText(h2h.get(homeTeams.get(pageCounter)).toString());
-            g1t2m.setText(h2h.get(awayTeams.get(pageCounter)).toString());
+            g1t1m.setText(h2h.get(homeTeams.get(curGame)).toString());
+            g1t2m.setText(h2h.get(awayTeams.get(curGame)).toString());
         }
 
 
         // Check if bets are locked.
-        if(spread.get(homeTeams.get(pageCounter)) == null){
+        if(spread.get(homeTeams.get(curGame)) == null){
             g1t1s.setText("Locked");
             g1t1s.setEnabled(false);
 
@@ -129,13 +132,13 @@ public class fanduel extends JFrame{
             g1t2s.setEnabled(false);
         }
         else{
-            g1t1s.setText(spread.get(homeTeams.get(pageCounter))[1].toString() + " " + spread.get(homeTeams.get(pageCounter))[0].toString());
-            g1t2s.setText(spread.get(awayTeams.get(pageCounter))[1].toString() + " " + spread.get(awayTeams.get(pageCounter))[0].toString());
+            g1t1s.setText(spread.get(homeTeams.get(curGame))[1].toString() + " " + spread.get(homeTeams.get(curGame))[0].toString());
+            g1t2s.setText(spread.get(awayTeams.get(curGame))[1].toString() + " " + spread.get(awayTeams.get(curGame))[0].toString());
         }
         
 
         // Check if bets are locked.
-        if(totals.get("Over" + homeTeams.get(pageCounter)) == null){
+        if(totals.get("Over" + homeTeams.get(curGame)) == null){
             g1over.setText("Locked");
             g1over.setEnabled(false);
 
@@ -143,8 +146,8 @@ public class fanduel extends JFrame{
             g1under.setEnabled(false);
         }
         else{
-            g1over.setText("O " + totals.get("Over" + homeTeams.get(pageCounter))[1].toString() + " " + totals.get("Over" + homeTeams.get(pageCounter))[0].toString());
-            g1under.setText("U " + totals.get("Under" + homeTeams.get(pageCounter))[1].toString() + " " + totals.get("Under" + homeTeams.get(pageCounter))[0].toString());
+            g1over.setText("O " + totals.get("Over" + homeTeams.get(curGame))[1].toString() + " " + totals.get("Over" + homeTeams.get(curGame))[0].toString());
+            g1under.setText("U " + totals.get("Under" + homeTeams.get(curGame))[1].toString() + " " + totals.get("Under" + homeTeams.get(curGame))[0].toString());
         }
 
         game1.add(g1t1);
@@ -245,12 +248,6 @@ public class fanduel extends JFrame{
         totalLabel.setFont(NovaReg);
         gameLabels.add(totalLabel);
 
-        game1 = new RoundedPanel(30, Color.decode("#C2CBD1"), Color.decode("#C2CBD1"));
-        game1.setBackground(Color.decode("#AFBBC2"));
-        game1.setLayout(new GridLayout(0, 4));
-        game1.setMaximumSize(new Dimension(530, 200));
-        game1.setAlignmentX(Component.CENTER_ALIGNMENT);
-
         game2 = new RoundedPanel(30, Color.decode("#C2CBD1"), Color.decode("#C2CBD1"));
         game2.setBackground(Color.decode("#AFBBC2"));
         game2.setLayout(new GridLayout(0, 4));
@@ -301,16 +298,19 @@ public class fanduel extends JFrame{
         bballBtn.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 games.removeAll();
-                curPage = 0;
+                gameNum = 0;
 
                 // Parse JSON from API call
                 try {
-                    basketball = new decode("https://api.the-odds-api.com/v4/sports/basketball_ncaab/odds/?apiKey=5081c089e598260629a5e8f81e9eccca&regions=us&markets=h2h,spreads,totals&oddsFormat=american");
+                    basketball = new decode("https://api.the-odds-api.com/v4/sports/basketball_ncaab/odds/?apiKey=8d59a6f9e5550fd863e2f492f17d5dab&regions=us&markets=h2h,spreads,totals&oddsFormat=american");
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
 
-                displayGames(basketball, curPage);
+                games.add(gameLabels);
+                popLists(basketball);
+                displayGames(gameNum);
+                displayGames(gameNum + 1);
 
             }
         });
@@ -331,16 +331,18 @@ public class fanduel extends JFrame{
         hockeyBtn.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 games.removeAll();
-                curPage = 0;
+                gameNum = 0;
 
                 // Parse JSON from API call
                 try {
-                    hockey = new decode("https://api.the-odds-api.com/v4/sports/icehockey_nhl/odds/?apiKey=5081c089e598260629a5e8f81e9eccca&regions=us&markets=h2h,spreads,totals&oddsFormat=american");
+                    hockey = new decode("https://api.the-odds-api.com/v4/sports/icehockey_nhl/odds/?apiKey=8d59a6f9e5550fd863e2f492f17d5dab&regions=us&markets=h2h,spreads,totals&oddsFormat=american");
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
 
-                displayGames(hockey, curPage);
+                games.add(gameLabels);
+                popLists(hockey);
+                displayGames(gameNum);
 
             }
         });
