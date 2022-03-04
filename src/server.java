@@ -31,6 +31,8 @@ public class server extends JFrame{
     {
         setSize(960, 620);
 
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         JPanel server = new JPanel();
         server.setLayout(null);
         TitledBorder title = new TitledBorder(new LineBorder(server.getBackground(), 1), "Server");
@@ -43,10 +45,20 @@ public class server extends JFrame{
 		userL.setBounds(30, 20, 150, 100);
 		server.add(userL);
 
+		JTextArea userF = new JTextArea();
+		userF.setEditable(false);
+		userF.setBounds(30, 100, 150, 400);
+		server.add(userF);
+
         JLabel currentL = new JLabel("Current Users: ");
 		currentL.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		currentL.setBounds(220, 20, 150, 100);
 		server.add(currentL);
+
+		JTextArea currentF = new JTextArea();
+		currentF.setEditable(false);
+		currentF.setBounds(220, 100, 150, 400);
+		server.add(currentF);
 
         JLabel moneyBL = new JLabel("Money Bet Today: ");
 		moneyBL.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -78,10 +90,20 @@ public class server extends JFrame{
 		statesL.setBounds(600, 20, 150, 100);
 		server.add(statesL);
 
+		JTextArea statesText = new JTextArea();
+		statesText.setEditable(false);
+		statesText.setBounds(600, 100, 150, 400);
+		server.add(statesText);
+
         JLabel sportsL = new JLabel("Trending Sports: ");
 		sportsL.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		sportsL.setBounds(790, 20, 150, 100);
 		server.add(sportsL);
+
+		JTextArea sportsText = new JTextArea();
+		sportsText.setEditable(false);
+		sportsText.setBounds(790, 100, 150, 400);
+		server.add(sportsText);
 
         JButton exit = new JButton("EXIT");
 		exit.setFont(new Font("Helvetica", Font.BOLD, 16));
