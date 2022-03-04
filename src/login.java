@@ -30,7 +30,7 @@ public class login extends JFrame{
 			String str = String.format("%tc", date);
 			   
        	   
-			String titleString = "--- Food Truck Kiosk --- " + str; 				    
+			String titleString = "--- FanDuel --- " + str; 				    
 			setTitle(titleString);
 			
 			NumberFormat formatter = new DecimalFormat("#0.00");
@@ -130,5 +130,50 @@ public class login extends JFrame{
         sign.setBounds(395, 470, 150, 20);
         login.add(sign);
 
+        refreshTitleBar();
     }
+
+    private void refreshTitleBar()
+	    {	
+		   Thread refreshAllTitleBar = new Thread()
+		   {
+			  public void run()
+			  { 
+				 while (true)
+				 {
+					 try 
+					 {
+					   //
+					   // display current time
+					   //
+					   Date  date = new Date();
+					   String str = String.format("%tc", date);
+	              	   
+					   String titleString = "--- Food Truck Kiosk --- " + str; 				 
+					   
+					   setTitle(titleString);
+						 
+					   sleep(5000L);                   // sleep for 5 seconds or 5,000 milliseconds
+					   
+	                 } // end try block
+				  
+			         catch (InterruptedException e) 
+			         {
+			        	 JOptionPane.showMessageDialog(null, 
+	                              "ERROR. Interrupt Exception! Check Internet Connection!",
+	                              "Title Top Bar",
+	                              JOptionPane.WARNING_MESSAGE);
+			        	 
+			        	 continue;
+				     }
+			         finally
+			         {
+				   
+			         }
+				 } // end while true
+		     }
+		  };
+
+	      refreshAllTitleBar.start();
+	    }
 }

@@ -152,7 +152,7 @@ public class signup extends JFrame{
 		JTextField addressF = new JTextField();
 		addressF.setEditable(true);
 		addressF.setBounds(100, 100, 150, 34);
-		nameF.setColumns(40);
+		addressF.setColumns(40);
 		signup.add(addressF);
 		
 		
@@ -643,6 +643,7 @@ public class signup extends JFrame{
 
                 passwordF.setText("");
 		
+				//take out status
 			    status.setText("Success!");
 			    status.setBackground(Color.GREEN);
 

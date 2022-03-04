@@ -171,7 +171,7 @@ public class fanduel extends JFrame{
 		String str = String.format("%tc", date);
 			   
        	   
-		String titleString = "--- Food Truck Kiosk --- " + str; 				    
+		String titleString = "--- Fanduel --- " + str; 				    
 		setTitle(titleString);
 			
 		NumberFormat formatter = new DecimalFormat("#0.00");
@@ -440,6 +440,50 @@ public class fanduel extends JFrame{
 		exit.setBounds(800, 535, 133, 34);
 		dashboard.add(exit);
 
+        refreshTitleBar();
     }
 
+    private void refreshTitleBar()
+	    {	
+		   Thread refreshAllTitleBar = new Thread()
+		   {
+			  public void run()
+			  { 
+				 while (true)
+				 {
+					 try 
+					 {
+					   //
+					   // display current time
+					   //
+					   Date  date = new Date();
+					   String str = String.format("%tc", date);
+	              	   
+					   String titleString = "--- Food Truck Kiosk --- " + str; 				 
+					   
+					   setTitle(titleString);
+						 
+					   sleep(5000L);                   // sleep for 5 seconds or 5,000 milliseconds
+					   
+	                 } // end try block
+				  
+			         catch (InterruptedException e) 
+			         {
+			        	 JOptionPane.showMessageDialog(null, 
+	                              "ERROR. Interrupt Exception! Check Internet Connection!",
+	                              "Title Top Bar",
+	                              JOptionPane.WARNING_MESSAGE);
+			        	 
+			        	 continue;
+				     }
+			         finally
+			         {
+				   
+			         }
+				 } // end while true
+		     }
+		  };
+
+	      refreshAllTitleBar.start();
+	    }
 }
