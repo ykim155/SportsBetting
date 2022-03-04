@@ -302,7 +302,7 @@ public class fanduel extends JFrame{
 
                 // Parse JSON from API call
                 try {
-                    basketball = new decode("https://api.the-odds-api.com/v4/sports/basketball_ncaab/odds/?apiKey=8d59a6f9e5550fd863e2f492f17d5dab&regions=us&markets=h2h,spreads,totals&oddsFormat=american");
+                    basketball = new decode("https://api.the-odds-api.com/v4/sports/basketball_nba/odds/?apiKey=8d59a6f9e5550fd863e2f492f17d5dab&regions=us&markets=h2h,spreads,totals&oddsFormat=american");
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
