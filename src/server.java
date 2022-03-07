@@ -31,6 +31,15 @@ public class server extends JFrame{
     {
         setSize(960, 620);
 
+		Date  date = new Date();
+		String str = String.format("%tc", date);
+			   
+       	   
+		String titleString = "--- Fanduel Server --- " + str; 				    
+		setTitle(titleString);
+			
+		NumberFormat formatter = new DecimalFormat("#0.00");
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel server = new JPanel();
@@ -142,5 +151,51 @@ public class server extends JFrame{
 		});
 		exit.setBounds(800, 560, 133, 34);
 		server.add(exit);
+
+		refreshTitleBar();
     }
+
+	private void refreshTitleBar()
+	    {	
+		   Thread refreshAllTitleBar = new Thread()
+		   {
+			  public void run()
+			  { 
+				 while (true)
+				 {
+					 try 
+					 {
+					   //
+					   // display current time
+					   //
+					   Date  date = new Date();
+					   String str = String.format("%tc", date);
+	              	   
+					   String titleString = "--- Fanduel --- " + str; 				 
+					   
+					   setTitle(titleString);
+						 
+					   sleep(5000L);                   // sleep for 5 seconds or 5,000 milliseconds
+					   
+	                 } // end try block
+				  
+			         catch (InterruptedException e) 
+			         {
+			        	 JOptionPane.showMessageDialog(null, 
+	                              "ERROR. Interrupt Exception! Check Internet Connection!",
+	                              "Title Top Bar",
+	                              JOptionPane.WARNING_MESSAGE);
+			        	 
+			        	 continue;
+				     }
+			         finally
+			         {
+				   
+			         }
+				 } // end while true
+		     }
+		  };
+
+	      refreshAllTitleBar.start();
+	    }
 }
