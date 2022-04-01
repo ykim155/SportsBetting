@@ -46,7 +46,6 @@ public class fanduel extends JFrame{
 
     private JPanel games;
     private JPanel gameLabels;
-    private JPanel game2;
 
     // Game 1, Team 1
     private JLabel g1t1 = new customJLabel(NovaReg);
@@ -65,8 +64,8 @@ public class fanduel extends JFrame{
     private JButton g1over = new customJButton(NovaReg);
 
     // Game 2, Team 1
-    private JButton g2t1 = new customJButton(NovaReg);
-    private JButton g2t2 = new customJButton(NovaReg);
+    private JLabel g2t1 = new customJLabel(NovaReg);
+    private JLabel g2t2 = new customJLabel(NovaReg);
 
     // Game 2, Team 1, Moneyline
     private JButton g2t1m = new customJButton(NovaReg);
@@ -93,14 +92,22 @@ public class fanduel extends JFrame{
 
     public void displayGames(int curGame){
         JPanel game1 = new RoundedPanel(30, Color.decode("#C2CBD1"), Color.decode("#C2CBD1"));
+        JPanel game2 = new RoundedPanel(30, Color.decode("#C2CBD1"), Color.decode("#C2CBD1"));
+
         game1.setBackground(Color.decode("#AFBBC2"));
         game1.setLayout(new GridLayout(0, 4));
         game1.setMaximumSize(new Dimension(530, 200));
         game1.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        game2.setBackground(Color.decode("#AFBBC2"));
+        game2.setLayout(new GridLayout(0, 4));
+        game2.setMaximumSize(new Dimension(530, 200));
+        game2.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // Add the game panels
         games.add(game1);
         games.add(Box.createRigidArea(new Dimension(0, 10)));
+        games.add(game2);
 
         // Write team names
         g1t1.setText("<html>" + "<center>" + homeTeams.get(curGame) + "</center>" + "</html>");
@@ -108,6 +115,12 @@ public class fanduel extends JFrame{
 
         g1t2.setText("<html>" + "<center>" + awayTeams.get(curGame) + "</center>" + "</html>");
         g1t2.setHorizontalAlignment(JLabel.CENTER);
+
+        g2t1.setText("<html>" + "<center>" + homeTeams.get(curGame+1) + "</center>" + "</html>");
+        g2t1.setHorizontalAlignment(JLabel.CENTER);
+
+        g2t2.setText("<html>" + "<center>" + awayTeams.get(curGame+1) + "</center>" + "</html>");
+        g2t2.setHorizontalAlignment(JLabel.CENTER);
 
         // Check if bets are locked.
         if(h2h.get(homeTeams.get(curGame)) == null){
@@ -120,6 +133,24 @@ public class fanduel extends JFrame{
         else{
             g1t1m.setText(h2h.get(homeTeams.get(curGame)).toString());
             g1t2m.setText(h2h.get(awayTeams.get(curGame)).toString());
+
+            g1t1m.setEnabled(true);
+            g1t2m.setEnabled(true);
+        }
+
+        if(h2h.get(homeTeams.get(curGame+1)) == null){
+            g2t1m.setText("Locked");
+            g2t2m.setText("Locked");
+
+            g2t1m.setEnabled(false);
+            g2t2m.setEnabled(false);
+        }
+        else{
+            g2t1m.setText(h2h.get(homeTeams.get(curGame+1)).toString());
+            g2t2m.setText(h2h.get(awayTeams.get(curGame+1)).toString());
+
+            g2t1m.setEnabled(true);
+            g2t2m.setEnabled(true);
         }
 
 
@@ -134,6 +165,24 @@ public class fanduel extends JFrame{
         else{
             g1t1s.setText(spread.get(homeTeams.get(curGame))[1].toString() + " " + spread.get(homeTeams.get(curGame))[0].toString());
             g1t2s.setText(spread.get(awayTeams.get(curGame))[1].toString() + " " + spread.get(awayTeams.get(curGame))[0].toString());
+
+            g1t1s.setEnabled(true);
+            g1t2s.setEnabled(true);
+        }
+
+        if(spread.get(homeTeams.get(curGame+1)) == null){
+            g2t1s.setText("Locked");
+            g2t1s.setEnabled(false);
+
+            g2t2s.setText("Locked");
+            g2t2s.setEnabled(false);
+        }
+        else{
+            g2t1s.setText(spread.get(homeTeams.get(curGame+1))[1].toString() + " " + spread.get(homeTeams.get(curGame+1))[0].toString());
+            g2t2s.setText(spread.get(awayTeams.get(curGame+1))[1].toString() + " " + spread.get(awayTeams.get(curGame+1))[0].toString());
+
+            g2t1s.setEnabled(true);
+            g2t2s.setEnabled(true);
         }
         
 
@@ -148,6 +197,24 @@ public class fanduel extends JFrame{
         else{
             g1over.setText("O " + totals.get("Over" + homeTeams.get(curGame))[1].toString() + " " + totals.get("Over" + homeTeams.get(curGame))[0].toString());
             g1under.setText("U " + totals.get("Under" + homeTeams.get(curGame))[1].toString() + " " + totals.get("Under" + homeTeams.get(curGame))[0].toString());
+
+            g1over.setEnabled(true);
+            g1under.setEnabled(true);
+        }
+
+        if(totals.get("Over" + homeTeams.get(curGame+1)) == null){
+            g2over.setText("Locked");
+            g2over.setEnabled(false);
+
+            g2under.setText("Locked");
+            g2under.setEnabled(false);
+        }
+        else{
+            g2over.setText("O " + totals.get("Over" + homeTeams.get(curGame+1))[1].toString() + " " + totals.get("Over" + homeTeams.get(curGame+1))[0].toString());
+            g2under.setText("U " + totals.get("Under" + homeTeams.get(curGame+1))[1].toString() + " " + totals.get("Under" + homeTeams.get(curGame+1))[0].toString());
+            
+            g2over.setEnabled(true);
+            g2under.setEnabled(true);
         }
 
         game1.add(g1t1);
@@ -160,8 +227,21 @@ public class fanduel extends JFrame{
         game1.add(g1t2s);
         game1.add(g1under);
 
+        game2.add(g2t1);
+        game2.add(g2t1m);
+        game2.add(g2t1s);
+        game2.add(g2over);
+
+        game2.add(g2t2);
+        game2.add(g2t2m);
+        game2.add(g2t2s);
+        game2.add(g2under);
+
         game1.revalidate();
         game1.repaint();
+
+        game2.revalidate();
+        game2.repaint();
     }
 
     public fanduel(){
@@ -248,11 +328,6 @@ public class fanduel extends JFrame{
         totalLabel.setFont(NovaReg);
         gameLabels.add(totalLabel);
 
-        game2 = new RoundedPanel(30, Color.decode("#C2CBD1"), Color.decode("#C2CBD1"));
-        game2.setBackground(Color.decode("#AFBBC2"));
-        game2.setLayout(new GridLayout(0, 4));
-        game2.setMaximumSize(new Dimension(530, 200));
-        game2.setAlignmentX(Component.CENTER_ALIGNMENT);
         /* 
         Sports Module (Maybe move this to a different file?)
         */
@@ -310,7 +385,6 @@ public class fanduel extends JFrame{
                 games.add(gameLabels);
                 popLists(basketball);
                 displayGames(gameNum);
-                displayGames(gameNum + 1);
 
             }
         });
