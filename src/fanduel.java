@@ -46,7 +46,6 @@ public class fanduel extends JFrame{
 
     private JPanel games;
     private JPanel gameLabels;
-    private JPanel game;
     private JPanel game1;
     private JPanel game2;
 
