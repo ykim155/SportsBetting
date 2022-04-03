@@ -50,6 +50,8 @@ public class fanduel extends JFrame{
     private JPanel game1;
     private JPanel game2;
 
+    // TODO: Make an onclick button function click(JButton button)
+
     // Game 1, Team 1
     private JLabel g1t1 = new customJLabel(NovaReg);
     private JLabel g1t2 = new customJLabel(NovaReg);

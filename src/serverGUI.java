@@ -16,9 +16,9 @@ import java.util.Map;
 import java.util.Vector;
 import java.lang.Math;
 
-public class server extends JFrame{
+public class serverGUI extends JFrame{
     public static void main(String[] args){
-        server frame = new server();
+        serverGUI frame = new serverGUI();
         frame.setVisible(true);
     }
 
@@ -27,7 +27,7 @@ public class server extends JFrame{
     public Font NovaReg;
 
 
-    public server()
+    public serverGUI()
     {
         setSize(960, 620);
 
