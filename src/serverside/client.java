@@ -16,12 +16,9 @@ public class client
 		try
 		{
 			Scanner scn = new Scanner(System.in);
-			
-			// getting localhost ip
-			InetAddress ip = InetAddress.getByName("localhost");
 	
 			// establish the connection with server port 4446
-			Socket s = new Socket(ip, 4446);
+			Socket s = new Socket("192.168.1.11", 4446);
 	
 			// obtaining input and out streams
 			DataInputStream dis = new DataInputStream(s.getInputStream());
