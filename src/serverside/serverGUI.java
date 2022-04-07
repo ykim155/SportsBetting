@@ -20,14 +20,11 @@ public class serverGUI extends JFrame{
     public static void main(String[] args){
         serverGUI frame = new serverGUI();
         frame.setVisible(true);
-		server s = new server();
-		s.run();
     }
 
     public Font Shentox;
     public Font NovaBold;
     public Font NovaReg;
-
 
     public serverGUI()
     {
@@ -154,8 +151,25 @@ public class serverGUI extends JFrame{
 		exit.setBounds(800, 560, 133, 34);
 		server.add(exit);
 
+		runSocketServer();
+
 		refreshTitleBar();
     }
+	private void runSocketServer(){
+		server s = new server();
+		Thread refreshBets = new Thread(){
+			public void run(){
+				try {
+					s.run();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		};
+
+		refreshBets.start();
+	}
 
 	private void refreshTitleBar()
 	    {	
