@@ -1,4 +1,4 @@
-package src;
+package src.serverside;
 
 // Fanduel Java Swing App
 
@@ -20,6 +20,8 @@ public class serverGUI extends JFrame{
     public static void main(String[] args){
         serverGUI frame = new serverGUI();
         frame.setVisible(true);
+		server s = new server();
+		s.run();
     }
 
     public Font Shentox;

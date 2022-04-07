@@ -13,13 +13,6 @@ public class server implements Runnable
     PrintWriter out;
     Socket connection = null;
 
-    public static void main(String[] args)
-    {
-        server s = new server();
-        s.run();
-    }
-
-
     public void run()
     {
         try
