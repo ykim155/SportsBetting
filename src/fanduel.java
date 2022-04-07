@@ -328,6 +328,18 @@ public class fanduel extends JFrame{
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
+                client work = new client();
+                String x = "basketball baby";
+                //try {
+                try {
+                    work.run(x);
+                } catch (UnknownHostException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                } catch (IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
                 games.add(gameLabels);
                 popLists(basketball);
                 displayGames(gameNum, game1, g1t1, g1t2, g1t1m, g1t2m, g1t1s, g1t2s, g1under, g1over);
@@ -462,26 +474,8 @@ public class fanduel extends JFrame{
 		exit.setBounds(800, 535, 133, 34);
 		dashboard.add(exit);
 
-        startClient();
-
         refreshTitleBar();
     }
-
-    private void startClient(){
-		client c = new client();
-		Thread sportsClient = new Thread(){
-			public void run(){
-				try {
-					c.run();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		};
-
-		sportsClient.start();
-	}
 
     private void refreshTitleBar()
 	    {	
