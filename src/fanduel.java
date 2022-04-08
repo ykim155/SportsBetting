@@ -50,6 +50,8 @@ public class fanduel extends JFrame{
     private JPanel game1;
     private JPanel game2;
 
+    private static String test;
+
     // TODO: Make an onclick button function click(JButton button)
 
     // Game 1, Team 1
@@ -83,6 +85,14 @@ public class fanduel extends JFrame{
     // Game 2 Under
     private JButton g2under = new customJButton(NovaReg);
     private JButton g2over = new customJButton(NovaReg);
+
+    public static String getTest(){
+        return test;
+    }
+
+    public static void setTest(String s){
+        test = s;
+    }
 
     public void popLists(decode sport){
         // Use get methods to set variables
@@ -190,6 +200,8 @@ public class fanduel extends JFrame{
         game.revalidate();
         game.repaint();
     }
+
+    client c = new client();
 
     public fanduel(){
         // Frame title display current time
@@ -328,6 +340,7 @@ public class fanduel extends JFrame{
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
+
                 games.add(gameLabels);
                 popLists(basketball);
                 displayGames(gameNum, game1, g1t1, g1t2, g1t1m, g1t2m, g1t1s, g1t2s, g1under, g1over);
@@ -468,15 +481,14 @@ public class fanduel extends JFrame{
     }
 
     private void startClient(){
-		client c = new client();
 		Thread sportsClient = new Thread(){
 			public void run(){
 				try {
-					c.run();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+                    c.run();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
 			}
 		};
 

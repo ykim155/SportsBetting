@@ -54,8 +54,6 @@ public class server
 // ClientHandler class
 class ClientHandler extends Thread
 {
-	DateFormat fordate = new SimpleDateFormat("yyyy/MM/dd");
-	DateFormat fortime = new SimpleDateFormat("hh:mm:ss");
 	final DataInputStream dis;
 	final DataOutputStream dos;
 	final Socket s;
