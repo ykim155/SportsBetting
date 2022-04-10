@@ -328,7 +328,7 @@ public class fanduel extends JFrame{
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
-                client work = new client();
+                /*client work = new client();
                 String x = "basketball baby";
                 //try {
                 try {
@@ -339,7 +339,7 @@ public class fanduel extends JFrame{
                 } catch (IOException e1) {
                     // TODO Auto-generated catch block
                     e1.printStackTrace();
-                }
+                } */
                 games.add(gameLabels);
                 popLists(basketball);
                 displayGames(gameNum, game1, g1t1, g1t2, g1t1m, g1t2m, g1t1s, g1t2s, g1under, g1over);

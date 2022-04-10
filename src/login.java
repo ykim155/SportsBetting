@@ -2,6 +2,9 @@ package src;
 
 import java.awt.event.*;
 import javax.swing.*;
+
+import src.serverside.serverSearch;
+
 import java.awt.*;
 import java.io.*; 
 import java.awt.image.BufferedImage;
@@ -129,6 +132,24 @@ public class login extends JFrame{
         });
         sign.setBounds(395, 470, 150, 20);
         login.add(sign);
+
+        JButton test = new JButton("Test");
+        test.setFont(NovaReg);
+        test.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                serverSearch serv = new serverSearch();
+                    serv.setVisible(true);
+                    //test = new socketUtils();
+            }
+        }
+        );
+        test.setBounds(500, 500, 150, 20);
+        login.add(test);
+        
+
+        
 
         refreshTitleBar();
     }

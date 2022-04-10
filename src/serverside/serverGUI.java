@@ -20,8 +20,8 @@ public class serverGUI extends JFrame{
     public static void main(String[] args){
         serverGUI frame = new serverGUI();
         frame.setVisible(true);
-		server s = new server();
-		s.run();
+		//socketServer s = new socketServer();
+		//s.run();
     }
 
     public Font Shentox;
