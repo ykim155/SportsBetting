@@ -35,7 +35,7 @@ public class serverSearch extends JFrame {
 	    
 		// green panel on top
 		JPanel greenPanel = new JPanel();
-	    greenPanel.setBackground(new Color(12, 182, 53));
+	    greenPanel.setBackground(new Color(51, 153, 255)); 
 	    greenPanel.setLocation(0, 0);
 	    greenPanel.setSize(1000, 85);
 	    contentPane.add(greenPanel);
@@ -60,8 +60,8 @@ public class serverSearch extends JFrame {
 		contentPane.add(displayIP);
 	 
 	    // search bar: filter activity
-	    JTextField searchField = new JTextField("Search for user (Name, Cashtag, Email, Phone Number)");
-	    searchField.setToolTipText("Search for user (Name, Cashtag, Email, Phone Number)");
+	    JTextField searchField = new JTextField("Search for user");
+	    searchField.setToolTipText("Search for user");
 	    searchField.setBounds(10, 135, 680, 40);
 	    contentPane.add(searchField);
 	   
@@ -99,7 +99,7 @@ public class serverSearch extends JFrame {
         nameBtn.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 22));
         contentPane.add(nameBtn);
         
-        JButton tagBtn = new JButton("Cashtag");
+        JButton tagBtn = new JButton("ID");
         tagBtn.setBounds(710, 240, 150, 25);
 		tagBtn.setBorderPainted(false);
 		tagBtn.setOpaque(false);
@@ -136,7 +136,7 @@ public class serverSearch extends JFrame {
 		JButton exitButton = new JButton("EXIT");
 		exitButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0){
-				int result = JOptionPane.showConfirmDialog(null, "Do you really want to exit the Cash App Server?", "Exit Application", JOptionPane.INFORMATION_MESSAGE);
+				int result = JOptionPane.showConfirmDialog(null, "Do you really want to exit the Fanduel Server?", "Exit Application", JOptionPane.INFORMATION_MESSAGE);
 				//JOptionPane.INFORMATION_MESSAGE: Yes, No, Exit
 				if(result == JOptionPane.OK_OPTION){
 					dispose();
