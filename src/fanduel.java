@@ -50,8 +50,6 @@ public class fanduel extends JFrame{
     private JPanel game1;
     private JPanel game2;
 
-    // TODO: Make an onclick button function click(JButton button)
-
     // Game 1, Team 1
     private JLabel g1t1 = new customJLabel(NovaReg);
     private JLabel g1t2 = new customJLabel(NovaReg);
@@ -84,6 +82,12 @@ public class fanduel extends JFrame{
     private JButton g2under = new customJButton(NovaReg);
     private JButton g2over = new customJButton(NovaReg);
 
+    // Current Bet Variables
+    float odd;
+    String oddStr;
+    float point = 0;
+    String pointStr;
+
     public void popLists(decode sport){
         // Use get methods to set variables
         homeTeams = sport.getHomeTeams();
@@ -103,15 +107,75 @@ public class fanduel extends JFrame{
 
         // Moneyline
         t1m = new customJButton(NovaReg);
+        t1m.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+
+                oddStr = h2h.get(homeTeams.get(curGame)).toString();
+                odd = Float.parseFloat(oddStr);
+
+            }
+        });
         t2m = new customJButton(NovaReg);
+        t2m.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+
+                oddStr = h2h.get(awayTeams.get(curGame)).toString();
+                odd = Float.parseFloat(oddStr);
+
+            }
+        });
 
         // Spread
         t1s = new customJButton(NovaReg);
+        t1s.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+
+                oddStr = spread.get(homeTeams.get(curGame))[0].toString();
+                odd = Float.parseFloat(oddStr);
+
+                pointStr = spread.get(homeTeams.get(curGame))[1].toString();
+                point = Float.parseFloat(pointStr);
+
+            }
+        });
         t2s = new customJButton(NovaReg);
+        t2s.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+
+                oddStr = spread.get(awayTeams.get(curGame))[0].toString();
+                odd = Float.parseFloat(oddStr);
+
+                pointStr = spread.get(awayTeams.get(curGame))[1].toString();
+                point = Float.parseFloat(pointStr);
+
+            }
+        });
 
         // Under/Over
         under = new customJButton(NovaReg);
+        under.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+
+                oddStr = totals.get("Over" + homeTeams.get(curGame))[0].toString();
+                odd = Float.parseFloat(oddStr);
+
+                pointStr = totals.get("Over" + homeTeams.get(curGame))[1].toString();
+                point = Float.parseFloat(pointStr);
+
+            }
+        });
         over = new customJButton(NovaReg);
+        over.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+
+                oddStr = totals.get("Under" + homeTeams.get(curGame))[1].toString();
+                odd = Float.parseFloat(oddStr);
+
+                pointStr = totals.get("Under" + homeTeams.get(curGame))[1].toString();
+                point = Float.parseFloat(pointStr);
+
+            }
+        });
 
         game.setBackground(Color.decode("#AFBBC2"));
         game.setLayout(new GridLayout(0, 4));
@@ -189,6 +253,15 @@ public class fanduel extends JFrame{
 
         game.revalidate();
         game.repaint();
+    }
+
+    // Add bets to placeBets panel
+    public void addBet(JButton button, JButton place, JPanel panel){
+        panel.removeAll();
+        panel.add(button);
+        panel.add(place);
+        panel.revalidate();
+        panel.repaint();
     }
 
     public fanduel(){
@@ -457,6 +530,28 @@ public class fanduel extends JFrame{
         forward.setFont(new Font("Helvetica", Font.BOLD, 30));
         forward.setBounds(455, 535, 275, 40);
         dashboard.add(forward);
+
+        // Place Bets Label
+        JLabel placeBetsLabel = new JLabel("Place Bets: ");
+        placeBetsLabel.setFont(NovaBold);
+        placeBetsLabel.setBounds(740, 50, 100, 50);
+        dashboard.add(placeBetsLabel);
+
+        // Place Bets Panel
+        JPanel placeBets = new RoundedPanel(30, Color.decode("#1493FF"), Color.decode("#1493FF"));
+        placeBets.setLayout(new BoxLayout(placeBets, BoxLayout.PAGE_AXIS));
+        placeBets.setBounds(740, 100, 185, 200);
+        dashboard.add(placeBets);
+
+        // Place Bet Button
+        JButton placeBetsButton = new JButton("Place Bet");
+        placeBetsButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+
+                // Event in here.
+
+            }
+        });
 
         //
 		// EXIT Button
