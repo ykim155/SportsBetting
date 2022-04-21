@@ -16,7 +16,7 @@ public class serverSearch extends JFrame {
 	public static JTextArea displayIP;
 	public static JTextArea incoming;
 	public static JTextArea bottom;
-	
+	public static JTextArea userList = new JTextArea("User List:");
 	public serverSearch(){
 
 		setSize(1000, 600);
@@ -64,9 +64,9 @@ public class serverSearch extends JFrame {
 	    searchField.setToolTipText("Search for user");
 	    searchField.setBounds(10, 135, 680, 40);
 	    contentPane.add(searchField);
-	   
 	    // display users
-		JTextArea userList = new JTextArea();
+		//JTextArea userList = new JTextArea("User List:");
+		// this is the textarea i used to test the updating of messages hehe
 		userList.setBounds(10, 180, 680, 180);
 		userList.setEditable(false);
 		userList.setBorder(new EtchedBorder(EtchedBorder.RAISED));

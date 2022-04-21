@@ -314,7 +314,7 @@ public class fanduel extends JFrame{
 
         // Space between buttons
         sportsButtons.add(Box.createRigidArea(new Dimension(0, 10)));
-
+        refreshTitleBar();
         // Basketball Button
         JButton bballBtn = new JButton("NBA");
         bballBtn.addActionListener(new ActionListener(){
@@ -328,6 +328,13 @@ public class fanduel extends JFrame{
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
+                socketUtils test = new socketUtils();
+                boolean connected = test.socketConnect();
+                if(connected){
+                    //test.sendMessage("Admin connected.");
+                    test.sendMessage("In The Misinformation Age: How False Beliefs Spread, the so-called “philosophers of ");
+                }
+                //test.sendMessage()
                 /*client work = new client();
                 String x = "basketball baby";
                 //try {
@@ -473,8 +480,6 @@ public class fanduel extends JFrame{
 		});
 		exit.setBounds(800, 535, 133, 34);
 		dashboard.add(exit);
-
-        refreshTitleBar();
     }
 
     private void refreshTitleBar()
@@ -483,6 +488,11 @@ public class fanduel extends JFrame{
 		   {
 			  public void run()
 			  { 
+                socketUtils test = new socketUtils();
+                boolean connected = test.socketConnect();
+                if(connected){
+                    test.sendMessage("Admin connected.");
+                }
 				 while (true)
 				 {
 					 try 
@@ -516,7 +526,8 @@ public class fanduel extends JFrame{
 			         }
 				 } // end while true
 		     }
-		  };
+		  
+            };
 
 	      refreshAllTitleBar.start();
 	    }

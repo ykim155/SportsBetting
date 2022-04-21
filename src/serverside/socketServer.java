@@ -34,6 +34,7 @@ public class socketServer implements Runnable
 	   static int numOfMessages = 0;
 	   static int max_connections = 5;
 	   static int numOfTransactions = 0; 
+	   static volatile Vector<String> messagStrings = new Vector<String>(30);
 
 	   
 
@@ -170,29 +171,31 @@ public class socketServer implements Runnable
 	     	       // update the status text area to show progress of program
 	              serverSearch.incoming.append("RLEN : " + clientString.length() + newline);
 	              
-	              if (clientString.length() > 128)
+	              if (clientString.length() > 60) // we need to add more cases i guess, to update the corresponding serverSearch field
 	              {
-	           	   session_done = true;
-	           	   continue;
+	           	   	session_done = true;
+					messagStrings.addElement(clientString);
+					serverSearch.userList.append(messagStrings.toString() + newline);
+	           	   	continue;
 	              }
 
 	              if (clientString.contains("quit"))
 	              {
-	                 session_done = true;
-	                 fileIO fio = new fileIO();
-	                 fio.wrTransactionData(serverSearch.incoming.getText());
+	                session_done = true;
+	                fileIO fio = new fileIO();
+	                fio.wrTransactionData(serverSearch.incoming.getText());
 	              }
 	              else if (clientString.contains("QUIT"))
 	              {
-	                 session_done = true;
-	                 fileIO fio = new fileIO();
-	                 fio.wrTransactionData(serverSearch.incoming.getText());
+	                session_done = true;
+	                fileIO fio = new fileIO();
+	                fio.wrTransactionData(serverSearch.incoming.getText());
 	              }
 	              else if (clientString.contains("Quit"))
 	              {
-	                 session_done = true;
-	                 fileIO fio = new fileIO();
-	                 fio.wrTransactionData(serverSearch.incoming.getText());
+	                session_done = true;
+	                fileIO fio = new fileIO();
+	                fio.wrTransactionData(serverSearch.incoming.getText());
 	              }
 	              else if (clientString.contains("Date>"))
 	              {
@@ -267,4 +270,7 @@ public class socketServer implements Runnable
 	     }
 	   
 	  }  // end run() thread method
+//public String decodeMessage(String clientString){
+//	return clientString;
+//}
 }
