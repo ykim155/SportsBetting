@@ -21,7 +21,6 @@ public class socketUtils
 		String ipAddress, portString;
 		int portNumber;
 		boolean rc=false;
-		
 		try 
 		{
 	    	File file = new File("config.txt");
@@ -36,7 +35,7 @@ public class socketUtils
 	        }
 	        else
 	        {        
-	           ipAddress  = "192.168.1.23"; //127.0.0.1 and "localhost" aren't working
+	           ipAddress  = "localhost"; //127.0.0.1 and "localhost" aren't working
 	           portNumber = 3333;
 	        }
 	          

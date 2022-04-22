@@ -152,10 +152,7 @@ public class fanduel extends JFrame{
                 pointStr = spread.get(awayTeams.get(curGame))[1].toString();
                 point = Float.parseFloat(pointStr);
 
-                if(connected){
-                    //test.sendMessage("Admin connected.");
-                    test.sendMessage("In The Misinformation Age: How False Beliefs Spread, the so-called “philosophers of ");
-                }
+                test.sendMessage("Odds: " + oddStr + " " + "Points: " + pointStr);
 
             }
         });
@@ -276,6 +273,12 @@ public class fanduel extends JFrame{
     public fanduel(){
         // Frame title display current time
 		//
+        socketUtils test = new socketUtils();
+        boolean connected = test.socketConnect();
+        if(connected){
+            test.sendMessage("User connected.");
+        }
+
 		Date  date = new Date();
 		String str = String.format("%tc", date);
 			   
@@ -410,12 +413,7 @@ public class fanduel extends JFrame{
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
-                test = new socketUtils();
-                connected = test.socketConnect();
-                if(connected){
-                    //test.sendMessage("Admin connected.");
-                    test.sendMessage("In The Misinformation Age: How False Beliefs Spread, the so-called “philosophers of ");
-                }
+                test.sendMessage("Betting basketball.");
                 //test.sendMessage()
                 /*client work = new client();
                 String x = "basketball baby";
@@ -592,11 +590,6 @@ public class fanduel extends JFrame{
 		   {
 			  public void run()
 			  { 
-                socketUtils test = new socketUtils();
-                boolean connected = test.socketConnect();
-                if(connected){
-                    test.sendMessage("Admin connected.");
-                }
 				 while (true)
 				 {
 					 try 
