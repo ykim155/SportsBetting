@@ -36,7 +36,7 @@ public class socketUtils
 	        }
 	        else
 	        {        
-	           ipAddress  = "localhost"; //127.0.0.1 and "localhost" aren't working
+	           ipAddress  = "192.168.1.23"; //127.0.0.1 and "localhost" aren't working
 	           portNumber = 3333;
 	        }
 	          

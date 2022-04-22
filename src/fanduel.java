@@ -88,6 +88,10 @@ public class fanduel extends JFrame{
     float point = 0;
     String pointStr;
 
+    // Server variables
+    boolean connected;
+    socketUtils test;
+
     public void popLists(decode sport){
         // Use get methods to set variables
         homeTeams = sport.getHomeTeams();
@@ -147,6 +151,11 @@ public class fanduel extends JFrame{
 
                 pointStr = spread.get(awayTeams.get(curGame))[1].toString();
                 point = Float.parseFloat(pointStr);
+
+                if(connected){
+                    //test.sendMessage("Admin connected.");
+                    test.sendMessage("In The Misinformation Age: How False Beliefs Spread, the so-called “philosophers of ");
+                }
 
             }
         });
@@ -401,8 +410,8 @@ public class fanduel extends JFrame{
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
-                socketUtils test = new socketUtils();
-                boolean connected = test.socketConnect();
+                test = new socketUtils();
+                connected = test.socketConnect();
                 if(connected){
                     //test.sendMessage("Admin connected.");
                     test.sendMessage("In The Misinformation Age: How False Beliefs Spread, the so-called “philosophers of ");
