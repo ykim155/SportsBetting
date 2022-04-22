@@ -103,7 +103,7 @@ public class fanduel extends JFrame{
         numPages = (int) Math.ceil(numGames / 2);
     }
 
-    public void displayGames(int curGame, JPanel game, JLabel t1, JLabel t2, JButton t1m, JButton t2m, JButton t1s, JButton t2s, JButton under, JButton over){
+    public void displayGames(int curGame, JPanel game, JLabel t1, JLabel t2, JButton t1m, JButton t2m, JButton t1s, JButton t2s, JButton under, JButton over, socketUtils test){
         game = new RoundedPanel(30, Color.decode("#C2CBD1"), Color.decode("#C2CBD1"));
 
         t1 = new customJLabel(NovaReg);
@@ -273,10 +273,10 @@ public class fanduel extends JFrame{
     public fanduel(){
         // Frame title display current time
 		//
-        socketUtils test = new socketUtils();
-        boolean connected = test.socketConnect();
+        socketUtils su = new socketUtils();
+        boolean connected = su.socketConnect();
         if(connected){
-            test.sendMessage("User connected.");
+            su.sendMessage("User connected.");
         }
 
 		Date  date = new Date();
@@ -413,7 +413,7 @@ public class fanduel extends JFrame{
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
-                test.sendMessage("Betting basketball.");
+                su.sendMessage("Betting basketball.");
                 //test.sendMessage()
                 /*client work = new client();
                 String x = "basketball baby";
@@ -429,8 +429,8 @@ public class fanduel extends JFrame{
                 } */
                 games.add(gameLabels);
                 popLists(basketball);
-                displayGames(gameNum, game1, g1t1, g1t2, g1t1m, g1t2m, g1t1s, g1t2s, g1under, g1over);
-                displayGames(gameNum+1, game2, g2t1, g2t2, g2t1m, g2t2m, g2t1s, g2t2s, g2under, g2over);
+                displayGames(gameNum, game1, g1t1, g1t2, g1t1m, g1t2m, g1t1s, g1t2s, g1under, g1over, su);
+                displayGames(gameNum+1, game2, g2t1, g2t2, g2t1m, g2t2m, g2t1s, g2t2s, g2under, g2over, su);
 
             }
         });
@@ -462,8 +462,8 @@ public class fanduel extends JFrame{
 
                 games.add(gameLabels);
                 popLists(hockey);
-                displayGames(gameNum, game1, g1t1, g1t2, g1t1m, g1t2m, g1t1s, g1t2s, g1under, g1over);
-                displayGames(gameNum+1, game2, g2t1, g2t2, g2t1m, g2t2m, g2t1s, g2t2s, g2under, g2over);
+                displayGames(gameNum, game1, g1t1, g1t2, g1t1m, g1t2m, g1t1s, g1t2s, g1under, g1over, su);
+                displayGames(gameNum+1, game2, g2t1, g2t2, g2t1m, g2t2m, g2t1s, g2t2s, g2under, g2over, su);
 
             }
         });
