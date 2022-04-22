@@ -170,7 +170,7 @@ public class login extends JFrame{
 					   Date  date = new Date();
 					   String str = String.format("%tc", date);
 	              	   
-					   String titleString = "--- Food Truck Kiosk --- " + str; 				 
+					   String titleString = "--- Login --- " + str; 				 
 					   
 					   setTitle(titleString);
 						 
