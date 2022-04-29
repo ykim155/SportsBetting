@@ -102,14 +102,47 @@ public class login extends JFrame{
         log.setFont(NovaReg);
         log.addActionListener(new ActionListener()
         {
-            public void actionPerformed(ActionEvent e)
+            public void actionPerformed(ActionEvent arg0)
             {
+                String nameString = nameField.getText();
+                nameString = nameString.trim();
+                if (!nameString.equals("user"))
+                {
+                    JOptionPane.showMessageDialog(null, 
+			                   "ERROR!  Wrong username!",
+			                   "Invalid Entry",
+			                   JOptionPane.WARNING_MESSAGE);
+					
+					return;
+                }
+
+                String passwordString = passwordField.getText();
+                passwordString = passwordString.trim();
+                if (!passwordString.equals("123"))
+                {
+                    JOptionPane.showMessageDialog(null, 
+			                   "ERROR!  Wrong password!",
+			                   "Invalid Entry",
+			                   JOptionPane.WARNING_MESSAGE);
+					
+					return;
+                }
+                /*if (nameString.equals("admin") && passwordString.equals("321"))
+                {
+                    serverSearch serv = new serverSearch();
+                    serv.setVisible(true);
+                } */
+
+                nameField.setText("");
+                passwordField.setText("");
+
                 fanduel fanD = new fanduel();   
                 setVisible(false); // Hide current frame
                 fanD.setVisible(true);
                 dispose();
             }
         });
+
         log.setBounds(420, 400, 100, 20);
         login.add(log);
 
@@ -137,15 +170,38 @@ public class login extends JFrame{
         test.setFont(NovaReg);
         test.addActionListener(new ActionListener()
         {
-            public void actionPerformed(ActionEvent e)
+            public void actionPerformed(ActionEvent arg0)
             {
+                String nameString = nameField.getText();
+                nameString = nameString.trim();
+                if (!nameString.equals("admin"))
+                {
+                    JOptionPane.showMessageDialog(null, 
+			                   "ERROR!  Wrong username!",
+			                   "Invalid Entry",
+			                   JOptionPane.WARNING_MESSAGE);
+					
+					return;
+                }
+
+                String passwordString = passwordField.getText();
+                passwordString = passwordString.trim();
+                if (!passwordString.equals("321"))
+                {
+                    JOptionPane.showMessageDialog(null, 
+			                   "ERROR!  Wrong password!",
+			                   "Invalid Entry",
+			                   JOptionPane.WARNING_MESSAGE);
+					
+					return;
+                }
                 serverSearch serv = new serverSearch();
                     serv.setVisible(true);
                     //test = new socketUtils();
             }
         }
         );
-        test.setBounds(500, 500, 150, 20);
+        test.setBounds(395, 500, 150, 20);
         login.add(test);
         
 
