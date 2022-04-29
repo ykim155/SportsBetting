@@ -66,7 +66,7 @@ public class socketServer implements Runnable
 	     // update the status text area to show progress of program
 	     try 
 	     {
-		     InetAddress ipAddress = InetAddress.getLocalHost();
+		     InetAddress ipAddress = InetAddress.getByName("10.101.14.44");
 		     serverSearch.incoming.append("IP Address : " + ipAddress.getHostAddress() + newline);
 	     }
 	     catch (UnknownHostException e1)

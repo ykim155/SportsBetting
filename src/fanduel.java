@@ -92,6 +92,9 @@ public class fanduel extends JFrame{
     boolean connected;
     socketUtils test;
 
+    // Place Bet Panel
+    JPanel placeBets;
+
     public void popLists(decode sport){
         // Use get methods to set variables
         homeTeams = sport.getHomeTeams();
@@ -152,7 +155,7 @@ public class fanduel extends JFrame{
                 pointStr = spread.get(awayTeams.get(curGame))[1].toString();
                 point = Float.parseFloat(pointStr);
 
-                test.sendMessage("Odds: " + oddStr + " " + "Points: " + pointStr);
+                addBet(oddStr, pointStr, awayTeams.get(curGame), placeBets, test);
 
             }
         });
@@ -262,10 +265,39 @@ public class fanduel extends JFrame{
     }
 
     // Add bets to placeBets panel
-    public void addBet(JButton button, JButton place, JPanel panel){
-        panel.removeAll();
-        panel.add(button);
-        panel.add(place);
+    public void addBet(String odds, String point, String team, JPanel panel, socketUtils sc){
+        String msg = team + "/" + odds + "/" + point;
+
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        JLabel bet = new JLabel("<html>" + "<center>" + "  " + team + " " + odds + " " + point + "</center>" + "</html>");
+        bet.setFont(NovaReg);
+        bet.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(bet);
+
+        panel.add(Box.createRigidArea(new Dimension(0, 20)));
+
+        JTextField amount = new JTextField();
+        amount.setEditable(true);
+        amount.setMaximumSize(new Dimension(100, 20));
+        amount.setHorizontalAlignment(JTextField.CENTER);
+        panel.add(amount);
+
+        panel.add(Box.createRigidArea(new Dimension(0, 20)));
+
+        JButton send = new JButton("Place Bet");
+        send.setAlignmentX(Component.CENTER_ALIGNMENT);
+        send.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+
+                String temp = amount.getText();
+                sc.sendMessage(msg + "/" + temp);
+
+            }
+        });
+        send.setFont(NovaReg);
+        panel.add(send);
+
         panel.revalidate();
         panel.repaint();
     }
@@ -409,24 +441,11 @@ public class fanduel extends JFrame{
 
                 // Parse JSON from API call
                 try {
-                    basketball = new decode("https://api.the-odds-api.com/v4/sports/basketball_nba/odds/?apiKey=8d59a6f9e5550fd863e2f492f17d5dab&regions=us&markets=h2h,spreads,totals&oddsFormat=american");
+                    basketball = new decode("https://api.the-odds-api.com/v4/sports/basketball_nba/odds/?apiKey=5081c089e598260629a5e8f81e9eccca&regions=us&markets=h2h,spreads,totals&oddsFormat=american");
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
-                su.sendMessage("Betting basketball.");
-                //test.sendMessage()
-                /*client work = new client();
-                String x = "basketball baby";
-                //try {
-                try {
-                    work.run(x);
-                } catch (UnknownHostException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                } catch (IOException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                } */
+
                 games.add(gameLabels);
                 popLists(basketball);
                 displayGames(gameNum, game1, g1t1, g1t2, g1t1m, g1t2m, g1t1s, g1t2s, g1under, g1over, su);
@@ -552,20 +571,11 @@ public class fanduel extends JFrame{
         dashboard.add(placeBetsLabel);
 
         // Place Bets Panel
-        JPanel placeBets = new RoundedPanel(30, Color.decode("#1493FF"), Color.decode("#1493FF"));
+        placeBets = new RoundedPanel(30, Color.decode("#1493FF"), Color.decode("#1493FF"));
         placeBets.setLayout(new BoxLayout(placeBets, BoxLayout.PAGE_AXIS));
         placeBets.setBounds(740, 100, 185, 200);
+        placeBets.setAlignmentX(Component.CENTER_ALIGNMENT);
         dashboard.add(placeBets);
-
-        // Place Bet Button
-        JButton placeBetsButton = new JButton("Place Bet");
-        placeBetsButton.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-
-                // Event in here.
-
-            }
-        });
 
         //
 		// EXIT Button

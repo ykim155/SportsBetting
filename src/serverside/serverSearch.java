@@ -49,8 +49,7 @@ public class serverSearch extends JFrame {
 			el.printStackTrace();
 		}
 		
-		//String ip = ipAddress.getHostAddress();
-		String ip = "localhost";
+		String ip = "10.101.14.44";
 	    
 	    // display IP and port
 		String display = "IP: " + ip + "        Listening on Port #: 3333";
