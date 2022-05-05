@@ -94,6 +94,7 @@ public class fanduel extends JFrame{
 
     // Place Bet Panel
     JPanel placeBets;
+    JPanel currentBets;
 
     public void popLists(decode sport){
         // Use get methods to set variables
@@ -156,7 +157,7 @@ public class fanduel extends JFrame{
                 point = Float.parseFloat(pointStr);
 
                 addBet(oddStr, pointStr, awayTeams.get(curGame), placeBets, test);
-
+               
             }
         });
 
@@ -268,6 +269,7 @@ public class fanduel extends JFrame{
     public void addBet(String odds, String point, String team, JPanel panel, socketUtils sc){
         String msg = team + "/" + odds + "/" + point;
 
+
         panel.add(Box.createRigidArea(new Dimension(0, 10)));
 
         JLabel bet = new JLabel("<html>" + "<center>" + "  " + team + " " + odds + " " + point + "</center>" + "</html>");
@@ -291,12 +293,26 @@ public class fanduel extends JFrame{
             public void actionPerformed(ActionEvent e){
 
                 String temp = amount.getText();
-                sc.sendMessage(msg + "/" + temp);
-
+                addCurrentBets(msg, temp,  currentBets);
+                sc.sendMessage(msg + "/$" +  temp);
+                
             }
         });
         send.setFont(NovaReg);
         panel.add(send);
+
+        panel.revalidate();
+        panel.repaint();
+    }
+
+    public void addCurrentBets(String message, String money, JPanel panel)
+    {
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        JLabel currBet = new JLabel("<html>" + "<center>" + "  " + message +  " " + "$" + money + "<html>" + "<center>");
+        currBet.setFont(NovaReg);
+        currBet.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(currBet);
 
         panel.revalidate();
         panel.repaint();
@@ -526,7 +542,7 @@ public class fanduel extends JFrame{
         /*
         Current Bets Module
         */
-        JPanel currentBets = new RoundedPanel(30, Color.decode("#1493FF"), Color.decode("#1493FF"));
+        currentBets = new RoundedPanel(30, Color.decode("#1493FF"), Color.decode("#1493FF"));
         currentBets.setLayout(new BoxLayout(currentBets, BoxLayout.PAGE_AXIS));
         currentBets.setBounds(20, 330, 150, 245);
         currentBets.setBorder(new EmptyBorder(10, 10, 10, 10));

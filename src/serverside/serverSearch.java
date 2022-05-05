@@ -17,6 +17,8 @@ public class serverSearch extends JFrame {
 	public static JTextArea incoming;
 	public static JTextArea bottom;
 	public static JTextArea userList = new JTextArea("User List:");
+	public static JTextArea income;
+
 	public serverSearch(){
 
 		setSize(1000, 600);
@@ -82,6 +84,20 @@ public class serverSearch extends JFrame {
 		scroll.setBounds(10, 370, 680, 140);
 		contentPane.add(scroll);
 	   
+		JLabel totalBets = new JLabel("Total Bets");
+		totalBets.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 20));
+		totalBets.setForeground(new Color(147,141,141));
+		totalBets.setBounds(800, 145, 200, 25);
+		contentPane.add(totalBets);
+
+		income = new JTextArea();
+		income.setBounds(800, 150, 100, 50);
+		income.setEditable(false);
+		income.setBorder(new EtchedBorder(EtchedBorder.RAISED));
+		contentPane.add(income);
+
+
+		/*
 	    // filter by label + uneditable text field
 		JLabel filterBy = new JLabel("Filter By");
 		filterBy.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 20));
@@ -124,7 +140,7 @@ public class serverSearch extends JFrame {
 		accAgeBtn.setForeground(new Color(147,141,141));
 		accAgeBtn.setBackground(new Color(28,255,79));
 		accAgeBtn.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 22));
-        contentPane.add(accAgeBtn);
+        contentPane.add(accAgeBtn); */
         
         // bottom area displays IP addresses connected 
         bottom = new JTextArea();
