@@ -84,7 +84,7 @@ public class serverSearch extends JFrame {
 		scroll.setBounds(10, 370, 680, 140);
 		contentPane.add(scroll);
 	   
-		JLabel totalBets = new JLabel("Total Bets");
+		JLabel totalBets = new JLabel("Money Bet");
 		totalBets.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 20));
 		totalBets.setForeground(new Color(147,141,141));
 		totalBets.setBounds(800, 145, 200, 25);
@@ -95,6 +95,7 @@ public class serverSearch extends JFrame {
 		income.setEditable(false);
 		income.setBorder(new EtchedBorder(EtchedBorder.RAISED));
 		contentPane.add(income);
+
 
 
 		/*

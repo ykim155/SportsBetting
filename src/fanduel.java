@@ -96,6 +96,10 @@ public class fanduel extends JFrame{
     JPanel placeBets;
     JPanel currentBets;
 
+    // wallet variables
+    JPanel wallet;
+    private float funds = 35;
+
     public void popLists(decode sport){
         // Use get methods to set variables
         homeTeams = sport.getHomeTeams();
@@ -592,6 +596,83 @@ public class fanduel extends JFrame{
         placeBets.setBounds(740, 100, 185, 200);
         placeBets.setAlignmentX(Component.CENTER_ALIGNMENT);
         dashboard.add(placeBets);
+
+        JLabel walletLabel = new JLabel("My Wallet:");
+        walletLabel.setFont(NovaBold);
+        walletLabel.setBounds(740, 300, 100, 50);
+        dashboard.add(walletLabel);
+
+        wallet = new RoundedPanel(30, Color.decode("#1493FF"), Color.decode("#1493FF"));
+        wallet.setLayout(new BoxLayout(wallet, BoxLayout.PAGE_AXIS));
+        wallet.setBounds(740, 350, 185, 150);
+        wallet.setAlignmentX(Component.CENTER_ALIGNMENT);
+        dashboard.add(wallet);
+
+        JTextField currency = new JTextField("$" + funds);
+        currency.setEditable(false);
+        currency.setMaximumSize(new Dimension(100, 30));
+        currency.setAlignmentX(Component.CENTER_ALIGNMENT);
+        wallet.add(currency);
+
+        JButton addCurrency5 = new JButton("Add $5");
+        addCurrency5.setFont(new Font("Helvetica", Font.BOLD, 16));
+        addCurrency5.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent arg0)
+            {
+                funds = funds + 5;
+                currency.setText("$" + String.valueOf(funds));
+            }
+        }
+        );
+        addCurrency5.setMaximumSize(new Dimension(150,30));
+        addCurrency5.setAlignmentX(Component.CENTER_ALIGNMENT);
+        wallet.add(addCurrency5);
+
+        JButton addCurrency25 = new JButton("Add $25");
+        addCurrency25.setFont(new Font("Helvetica", Font.BOLD, 16));
+        addCurrency25.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent arg0)
+            {
+                funds = funds + 25;
+                currency.setText("$" + String.valueOf(funds));
+            }
+        }
+        );
+        addCurrency25.setMaximumSize(new Dimension(150,30));
+        addCurrency25.setAlignmentX(Component.CENTER_ALIGNMENT);
+        wallet.add(addCurrency25);
+
+        JButton addCurrency50 = new JButton("Add $50");
+        addCurrency50.setFont(new Font("Helvetica", Font.BOLD, 16));
+        addCurrency50.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent arg0)
+            {
+                funds = funds + 50;
+                currency.setText("$" + String.valueOf(funds));
+            }
+        }
+        );
+        addCurrency50.setMaximumSize(new Dimension(150,30));
+        addCurrency50.setAlignmentX(Component.CENTER_ALIGNMENT);
+        wallet.add(addCurrency50);
+
+        JButton addCurrency100 = new JButton("Add $100");
+        addCurrency100.setFont(new Font("Helvetica", Font.BOLD, 16));
+        addCurrency100.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent arg0)
+            {
+                funds = funds + 100;
+                currency.setText("$" + String.valueOf(funds));
+            }
+        }
+        );
+        addCurrency100.setMaximumSize(new Dimension(150,30));
+        addCurrency100.setAlignmentX(Component.CENTER_ALIGNMENT);
+        wallet.add(addCurrency100);
 
         //
 		// EXIT Button

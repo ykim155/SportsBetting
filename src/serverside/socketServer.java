@@ -170,8 +170,10 @@ public class socketServer implements Runnable
 	     	       
 	     	       // update the status text area to show progress of program
 	              serverSearch.incoming.append("RLEN : " + clientString.length() + newline);
+
+
 	              
-	              if (clientString.length() > 60) // we need to add more cases i guess, to update the corresponding serverSearch field
+	              if (clientString.length() > 60) 
 	              {
 	           	   	session_done = true;
 					messagStrings.addElement(clientString);
