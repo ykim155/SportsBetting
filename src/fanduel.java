@@ -673,14 +673,20 @@ public class fanduel extends JFrame{
         addCurrency50.setAlignmentX(Component.CENTER_ALIGNMENT);
         wallet.add(addCurrency50);
 
-        JButton addCurrency100 = new JButton("Add $100");
+        JButton addCurrency100 = new JButton("Cash Out");
         addCurrency100.setFont(new Font("Helvetica", Font.BOLD, 16));
         addCurrency100.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent arg0)
             {
-                funds = funds + 100;
+                funds = 0;
                 currency.setText("$" + String.valueOf(funds));
+                JOptionPane.showMessageDialog(null, 
+			                   "Money sent to your bank account!",
+			                   "Please give 3-5 days for processing!",
+			                   JOptionPane.WARNING_MESSAGE);
+					
+					return;
             }
         }
         );
