@@ -98,6 +98,7 @@ public class fanduel extends JFrame{
 
     // wallet variables
     JPanel wallet;
+    JTextField currency;
     private float funds = 35;
 
     public void popLists(decode sport){
@@ -160,8 +161,7 @@ public class fanduel extends JFrame{
                 pointStr = spread.get(awayTeams.get(curGame))[1].toString();
                 point = Float.parseFloat(pointStr);
 
-                addBet(oddStr, pointStr, awayTeams.get(curGame), placeBets, test);
-               
+                addBet(oddStr, pointStr, awayTeams.get(curGame), placeBets, test, currency);
             }
         });
 
@@ -270,7 +270,7 @@ public class fanduel extends JFrame{
     }
 
     // Add bets to placeBets panel
-    public void addBet(String odds, String point, String team, JPanel panel, socketUtils sc){
+    public void addBet(String odds, String point, String team, JPanel panel, socketUtils sc, JTextField currency){
         String msg = team + "/" + odds + "/" + point;
 
 
@@ -295,6 +295,20 @@ public class fanduel extends JFrame{
         send.setAlignmentX(Component.CENTER_ALIGNMENT);
         send.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+
+                float subtract = Float.parseFloat(amount.getText());
+                float temp1 = funds - subtract;
+                if (temp1 < 0)
+                {
+                    JOptionPane.showMessageDialog(null, 
+			                   "ERROR!  Insufficient Funds!",
+			                   "Invalid Entry",
+			                   JOptionPane.WARNING_MESSAGE);
+					
+					return;
+                }
+
+                currency.setText("$" + String.valueOf(temp1));
 
                 String temp = amount.getText();
                 addCurrentBets(msg, temp,  currentBets);
@@ -608,7 +622,7 @@ public class fanduel extends JFrame{
         wallet.setAlignmentX(Component.CENTER_ALIGNMENT);
         dashboard.add(wallet);
 
-        JTextField currency = new JTextField("$" + funds);
+        currency = new JTextField("$" + funds);
         currency.setEditable(false);
         currency.setMaximumSize(new Dimension(100, 30));
         currency.setAlignmentX(Component.CENTER_ALIGNMENT);
