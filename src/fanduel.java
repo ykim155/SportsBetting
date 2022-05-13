@@ -126,6 +126,8 @@ public class fanduel extends JFrame{
                 oddStr = h2h.get(homeTeams.get(curGame)).toString();
                 odd = Float.parseFloat(oddStr);
 
+                addBet(oddStr, "", homeTeams.get(curGame), placeBets, test, currency);
+
             }
         });
         t2m = new customJButton(NovaReg);
@@ -134,6 +136,8 @@ public class fanduel extends JFrame{
 
                 oddStr = h2h.get(awayTeams.get(curGame)).toString();
                 odd = Float.parseFloat(oddStr);
+
+                addBet(oddStr, "", awayTeams.get(curGame), placeBets, test, currency);
 
             }
         });
@@ -148,6 +152,8 @@ public class fanduel extends JFrame{
 
                 pointStr = spread.get(homeTeams.get(curGame))[1].toString();
                 point = Float.parseFloat(pointStr);
+
+                addBet(oddStr, pointStr, homeTeams.get(curGame), placeBets, test, currency);
 
             }
         });
@@ -166,8 +172,8 @@ public class fanduel extends JFrame{
         });
 
         // Under/Over
-        under = new customJButton(NovaReg);
-        under.addActionListener(new ActionListener(){
+        over = new customJButton(NovaReg);
+        over.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
 
                 oddStr = totals.get("Over" + homeTeams.get(curGame))[0].toString();
@@ -176,17 +182,21 @@ public class fanduel extends JFrame{
                 pointStr = totals.get("Over" + homeTeams.get(curGame))[1].toString();
                 point = Float.parseFloat(pointStr);
 
+                addBet(oddStr, "Over " + pointStr, homeTeams.get(curGame), placeBets, test, currency);
+
             }
         });
-        over = new customJButton(NovaReg);
-        over.addActionListener(new ActionListener(){
+        under = new customJButton(NovaReg);
+        under.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
 
-                oddStr = totals.get("Under" + homeTeams.get(curGame))[1].toString();
+                oddStr = totals.get("Under" + homeTeams.get(curGame))[0].toString();
                 odd = Float.parseFloat(oddStr);
 
                 pointStr = totals.get("Under" + homeTeams.get(curGame))[1].toString();
                 point = Float.parseFloat(pointStr);
+
+                addBet(oddStr, "Under " + pointStr, homeTeams.get(curGame), placeBets, test, currency);
 
             }
         });
@@ -483,7 +493,7 @@ public class fanduel extends JFrame{
                 games.add(gameLabels);
                 popLists(basketball);
                 displayGames(gameNum, game1, g1t1, g1t2, g1t1m, g1t2m, g1t1s, g1t2s, g1under, g1over, su);
-                displayGames(gameNum+1, game2, g2t1, g2t2, g2t1m, g2t2m, g2t1s, g2t2s, g2under, g2over, su);
+                displayGames(gameNum+1, game2, g2t1, g2t2, g2t1m, g2t2m, g2t1s, g2t2s, g2under, g2over, su); 
 
             }
         });
@@ -577,7 +587,14 @@ public class fanduel extends JFrame{
         back.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
 
-                // Event in here.
+                gameNum = gameNum - 1;
+
+                games.removeAll();
+                games.revalidate();
+                games.repaint();
+
+                displayGames(gameNum, game1, g1t1, g1t2, g1t1m, g1t2m, g1t1s, g1t2s, g1under, g1over, su);
+                displayGames(gameNum + 1, game1, g1t1, g1t2, g1t1m, g1t2m, g1t1s, g1t2s, g1under, g1over, su);
 
             }
         });
@@ -590,7 +607,14 @@ public class fanduel extends JFrame{
         forward.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
 
-                // Event in here.
+                gameNum = gameNum + 1;
+
+                games.removeAll();
+                games.revalidate();
+                games.repaint();
+
+                displayGames(gameNum, game1, g1t1, g1t2, g1t1m, g1t2m, g1t1s, g1t2s, g1under, g1over, su);
+                displayGames(gameNum + 1, game1, g1t1, g1t2, g1t1m, g1t2m, g1t1s, g1t2s, g1under, g1over, su);
 
             }
         });
