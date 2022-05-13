@@ -276,7 +276,7 @@ public class fanduel extends JFrame{
 
         panel.add(Box.createRigidArea(new Dimension(0, 10)));
 
-        JLabel bet = new JLabel("<html>" + "<center>" + "  " + team + " " + odds + " " + point + "</center>" + "</html>");
+        JLabel bet = new JLabel("<html>" + "<center>" + "  " + team + " " + odds + " " + point + "</center>" + "</html>", SwingConstants.CENTER);
         bet.setFont(NovaReg);
         bet.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(bet);
