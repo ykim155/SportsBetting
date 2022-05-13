@@ -673,9 +673,9 @@ public class fanduel extends JFrame{
         addCurrency50.setAlignmentX(Component.CENTER_ALIGNMENT);
         wallet.add(addCurrency50);
 
-        JButton addCurrency100 = new JButton("Cash Out");
-        addCurrency100.setFont(new Font("Helvetica", Font.BOLD, 16));
-        addCurrency100.addActionListener(new ActionListener()
+        JButton cashOut = new JButton("Cash Out");
+        cashOut.setFont(new Font("Helvetica", Font.BOLD, 16));
+        cashOut.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent arg0)
             {
@@ -690,9 +690,9 @@ public class fanduel extends JFrame{
             }
         }
         );
-        addCurrency100.setMaximumSize(new Dimension(150,30));
-        addCurrency100.setAlignmentX(Component.CENTER_ALIGNMENT);
-        wallet.add(addCurrency100);
+        cashOut.setMaximumSize(new Dimension(150,30));
+        cashOut.setAlignmentX(Component.CENTER_ALIGNMENT);
+        wallet.add(cashOut);
 
         //
 		// EXIT Button
