@@ -319,6 +319,7 @@ public class fanduel extends JFrame{
                 }
 
                 currency.setText("$" + String.valueOf(temp1));
+                funds = temp1;
 
                 String temp = amount.getText();
                 addCurrentBets(msg, temp,  currentBets);
