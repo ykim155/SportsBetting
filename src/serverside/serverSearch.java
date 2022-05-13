@@ -91,7 +91,7 @@ public class serverSearch extends JFrame {
 		contentPane.add(totalBets);
 
 		income = new JTextArea();
-		income.setBounds(800, 150, 100, 50);
+		income.setBounds(800, 165, 100, 50);
 		income.setEditable(false);
 		income.setBorder(new EtchedBorder(EtchedBorder.RAISED));
 		contentPane.add(income);

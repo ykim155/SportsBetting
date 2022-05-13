@@ -35,7 +35,9 @@ public class socketServer implements Runnable
 	   static int max_connections = 5;
 	   static int numOfTransactions = 0; 
 	   static volatile Vector<String> messagStrings = new Vector<String>(30);
+	   static Vector<String> userVec = new Vector<String>(5);
 
+	   static Double money = 0.0;
 	   
 
 	   socketServer(Socket csocket, String ip)
@@ -66,7 +68,7 @@ public class socketServer implements Runnable
 	     // update the status text area to show progress of program
 	     try 
 	     {
-		     InetAddress ipAddress = InetAddress.getByName("10.101.14.44");
+		     InetAddress ipAddress = InetAddress.getByName("10.101.14.44");//("10.101.14.44");
 		     serverSearch.incoming.append("IP Address : " + ipAddress.getHostAddress() + newline);
 	     }
 	     catch (UnknownHostException e1)
@@ -125,12 +127,13 @@ public class socketServer implements Runnable
 	      long threadId;
 	      String clientString;
 	      String keyString = "";
-	    
+		 // String userName;
 	      threadId = Thread.currentThread().getId();
 	      
 	      numOfConnections++;
-	      
+		  String userName = " user" + String.valueOf(numOfConnections);
 	      serverSearch.incoming.append("Num of Connections = " + numOfConnections + newline);
+		  serverSearch.userList.append(userName + newline);
 	      
 	      keyString = ipString + ":" + threadId;
 	      
@@ -141,6 +144,7 @@ public class socketServer implements Runnable
 	      {
 	    	    int counter = 0;
 	        	vec.addElement(keyString);
+
 	        	
 	        	serverSearch.bottom.setText("");
 	        	Enumeration<String> en = vec.elements();
@@ -171,7 +175,16 @@ public class socketServer implements Runnable
 	     	       // update the status text area to show progress of program
 	              serverSearch.incoming.append("RLEN : " + clientString.length() + newline);
 
+				if (clientString.contains("$")){
+					String tempMoney = "";
+					int i = clientString.indexOf('$') + 1;
+					for(int j = i; j < clientString.length(); j++){
+						tempMoney += clientString.charAt(j);
+					}
+					money += Double.parseDouble(tempMoney);
 
+					serverSearch.income.setText(Double.toString(money));
+				}
 	              
 	              if (clientString.length() > 60) 
 	              {
