@@ -93,7 +93,7 @@ public class login extends JFrame{
         passwordAsk.setBounds(345, 350, 100, 50);
         login.add(passwordAsk);
 
-        JTextField passwordField = new JTextField();
+        JPasswordField passwordField = new JPasswordField();
         passwordField.setEditable(true);
         passwordField.setBounds(430, 365, 150, 20);
         login.add(passwordField);
