@@ -598,6 +598,8 @@ public class fanduel extends JFrame{
                 games.revalidate();
                 games.repaint();
 
+                games.add(gameLabels);
+
                 displayGames(gameNum, game1, g1t1, g1t2, g1t1m, g1t2m, g1t1s, g1t2s, g1under, g1over, su);
                 displayGames(gameNum + 1, game1, g1t1, g1t2, g1t1m, g1t2m, g1t1s, g1t2s, g1under, g1over, su);
 
@@ -617,6 +619,8 @@ public class fanduel extends JFrame{
                 games.removeAll();
                 games.revalidate();
                 games.repaint();
+
+                games.add(gameLabels);
 
                 displayGames(gameNum, game1, g1t1, g1t2, g1t1m, g1t2m, g1t1s, g1t2s, g1under, g1over, su);
                 displayGames(gameNum + 1, game1, g1t1, g1t2, g1t1m, g1t2m, g1t1s, g1t2s, g1under, g1over, su);
