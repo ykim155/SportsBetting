@@ -324,6 +324,11 @@ public class fanduel extends JFrame{
                 addCurrentBets(msg, temp,  currentBets);
                 sc.sendMessage(msg + "/$" +  temp);
                 
+                panel.removeAll();
+
+                panel.revalidate();
+                panel.repaint();
+
             }
         });
         send.setFont(NovaReg);
